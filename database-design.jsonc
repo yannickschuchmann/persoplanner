@@ -1,0 +1,77 @@
+{
+  "users": {
+    "a6AHmSolRGYG8rwwiXyxMJQ7Zw23": {
+      "lists": {
+        "DC Fokus": {
+          "name": "DC Fokus",
+          "sort": 0,
+          "boards": [
+            {
+              "id": 123, // deepXtech
+              "list": "Todo",
+              "label": null,
+              "member": true
+            },
+            {
+              "id": 456, // deepinsights
+              "list": "Todo",
+              "label": null,
+              "member": true
+            },
+            {
+              "id": 789, // holding
+              "list": "Todo",
+              "label": null,
+              "member": true
+            }
+          ]
+        },
+        "Private Necessary": {
+          "name": "Private Necessary",
+          "sort": 1,
+          "boards": [
+            {
+              "id": 1, // Private
+              "list": null,
+              "label": "Necessary",
+              "member": null
+            }
+          ]
+        },
+        "Private Later": {
+          "name": "Private Later",
+          "sort": 3,
+          "boards": [
+            {
+              "id": 1, // Private
+              "list": null,
+              "label": "Later",
+              "member": null
+            }
+          ]
+        },
+        "Fun": {
+          "name": "Fun",
+          "sort": 4,
+          "boards": [
+            {
+              "id": 1, // Private
+              "list": null,
+              "label": "Fun",
+              "member": null
+            }
+          ]
+        }
+      },
+      "cards": {
+        "123123": {
+          "id": "123123",
+          "selected": true,
+          "archived": false,
+          "done": false,
+          "size": 1
+        }
+      }
+    }
+  }
+}

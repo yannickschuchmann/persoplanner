@@ -1,0 +1,2 @@
+- archived icon to todoslist
+- form to add todolists from trello boards or lists and member filter
