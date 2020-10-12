@@ -5,24 +5,13 @@
         "DC Fokus": {
           "name": "DC Fokus",
           "sort": 0,
+          "color": "#aaaaaa",
           "boards": [
             {
               "id": 123, // deepXtech
-              "list": "Todo",
-              "label": null,
-              "member": true
-            },
-            {
-              "id": 456, // deepinsights
-              "list": "Todo",
-              "label": null,
-              "member": true
-            },
-            {
-              "id": 789, // holding
-              "list": "Todo",
-              "label": null,
-              "member": true
+              "listId": "Todo",
+              "memberId": true,
+              "label": null
             }
           ]
         },

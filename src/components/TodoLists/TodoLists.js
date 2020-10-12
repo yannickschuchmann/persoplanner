@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import {
   compose,
   flatten,
@@ -18,12 +18,15 @@ import Tabs from "@material-ui/core/Tabs";
 import AppBar from "@material-ui/core/AppBar";
 import Menu from "@material-ui/core/Menu";
 import MenuItem from "@material-ui/core/MenuItem";
+import AddIcon from "@material-ui/icons/Add";
+import Form from "./TodoListForm";
 import { makeStyles } from "@material-ui/core/styles";
 
 const onError = (e) => alert(e);
 const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
+    width: "100%",
     backgroundColor: theme.palette.background.paper,
   },
   appBar: {
@@ -104,9 +107,19 @@ function a11yProps(index) {
   };
 }
 
-export const TodoLists = ({ lists = [], selectedCards = [], onSelect }) => {
+export const TodoLists = ({
+  onTodoListSubmit,
+  lists = [],
+  selectedCards = [],
+  onSelect,
+}) => {
   const classes = useStyles();
+  const ref = useRef();
   const [data, setData] = useState(null);
+  const [tabIndex, setTabIndex] = useState(1);
+  const dataAsList = data ? Object.values(data) : [];
+  const formPanelIndex = dataAsList.length;
+
   useEffect(() => {
     lists.forEach(async (list) => {
       const cardsPerBoard = await Promise.all(
@@ -149,14 +162,17 @@ export const TodoLists = ({ lists = [], selectedCards = [], onSelect }) => {
     });
   }, [lists, selectedCards]);
 
-  const [tabIndex, setTabIndex] = useState(0);
-
   const onTabsChange = (_, newTabIndex) => {
     setTabIndex(newTabIndex);
   };
+
+  const onSubmit = async (values) => {
+    await onTodoListSubmit(values);
+  };
+
   return (
     <div>
-      <div className={classes.root}>
+      <div ref={ref} className={classes.root}>
         <AppBar
           className={classes.appBar}
           color="transparent"
@@ -164,11 +180,12 @@ export const TodoLists = ({ lists = [], selectedCards = [], onSelect }) => {
         >
           <Tabs
             value={tabIndex}
+            variant="scrollable"
             onChange={onTabsChange}
             aria-label="Todo Lists"
           >
             {data &&
-              Object.values(data).map(({ name, color, cards }, index) => (
+              dataAsList.map(({ name, color, cards }, index) => (
                 <Tab
                   style={{ background: color }}
                   key={index}
@@ -178,14 +195,24 @@ export const TodoLists = ({ lists = [], selectedCards = [], onSelect }) => {
                   {...a11yProps(index)}
                 />
               ))}
+            <Tab
+              value={formPanelIndex}
+              icon={<AddIcon />}
+              onClick={() => {
+                ref.current.scrollIntoView({ behavior: "smooth" });
+              }}
+            />
           </Tabs>
         </AppBar>
         {data &&
-          Object.values(data).map((list, index) => (
-            <TabPanel value={index} index={index} key={index}>
+          dataAsList.map((list, index) => (
+            <TabPanel value={index} index={tabIndex} key={index}>
               <TodoList onSelect={onSelect} {...list} />
             </TabPanel>
           ))}
+        <TabPanel value={formPanelIndex} index={tabIndex}>
+          <Form onSubmit={onTodoListSubmit} />
+        </TabPanel>
       </div>
     </div>
   );

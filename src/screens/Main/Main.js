@@ -85,6 +85,15 @@ export const Main = () => {
       );
   };
 
+  const onTodoListSubmit = (list) => {
+    return db
+      .collection("users")
+      .doc(user.uid)
+      .collection("lists")
+      .doc(list.name)
+      .set(list);
+  };
+
   const onArchive = async (doneCards) => {
     const batch = db.batch();
 
@@ -120,6 +129,7 @@ export const Main = () => {
       </div>
       <Box boxShadow={3} className={classes.todoLists}>
         <TodoLists
+          onTodoListSubmit={onTodoListSubmit}
           selectedCards={selectedCards}
           onSelect={onCardSelect}
           lists={lists}

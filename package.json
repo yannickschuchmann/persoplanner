@@ -10,6 +10,7 @@
     "@testing-library/user-event": "^7.1.2",
     "firebase": "^7.23.0",
     "firebaseui": "^4.6.1",
+    "formik": "^2.2.0",
     "isotope-layout": "^3.0.6",
     "isotope-packery": "^2.0.1",
     "ramda": "^0.27.1",
