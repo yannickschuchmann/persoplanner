@@ -116,7 +116,7 @@ export const TodoLists = ({
   const classes = useStyles();
   const ref = useRef();
   const [data, setData] = useState(null);
-  const [tabIndex, setTabIndex] = useState(1);
+  const [tabIndex, setTabIndex] = useState(0);
   const dataAsList = data ? Object.values(data) : [];
   const formPanelIndex = dataAsList.length;
 

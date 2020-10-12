@@ -142,7 +142,12 @@ const TodoListForm = ({ list = newList, onSubmit }) => {
                     <Box my={2}>
                       {values.boards &&
                         values.boards.map((board, index) => (
-                          <Box position="relative" my={2} key={index}>
+                          <Box
+                            {...console.log(board, board.memberIds)}
+                            position="relative"
+                            my={2}
+                            key={index}
+                          >
                             <Card variant="outlined">
                               <CardContent>
                                 <Box
@@ -199,7 +204,7 @@ const TodoListForm = ({ list = newList, onSubmit }) => {
                                       <Select
                                         fullWidth
                                         labelId={`board${index}list`}
-                                        id={`board${index}-select`}
+                                        id={`board${index}-select-list`}
                                         value={board.listId}
                                         name={`boards.${index}.listId`}
                                         onChange={handleChange}
@@ -228,7 +233,7 @@ const TodoListForm = ({ list = newList, onSubmit }) => {
                                       <Select
                                         fullWidth
                                         labelId={`board${index}labels`}
-                                        id={`board${index}-select`}
+                                        id={`board${index}-select-labels`}
                                         value={board.labelIds}
                                         multiple
                                         name={`boards.${index}.labelIds`}
@@ -255,7 +260,7 @@ const TodoListForm = ({ list = newList, onSubmit }) => {
                                       <Select
                                         fullWidth
                                         labelId={`board${index}members`}
-                                        id={`board${index}-select`}
+                                        id={`board${index}-select-members`}
                                         value={board.memberIds}
                                         multiple
                                         name={`boards.${index}.memberIds`}
@@ -280,7 +285,7 @@ const TodoListForm = ({ list = newList, onSubmit }) => {
                         <Button
                           startIcon={<AddIcon />}
                           type="button"
-                          onClick={() => arrayHelpers.push(newList)}
+                          onClick={() => arrayHelpers.push(newList.boards[0])}
                         >
                           Add another board
                         </Button>
