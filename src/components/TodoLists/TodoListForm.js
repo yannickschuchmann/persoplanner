@@ -35,7 +35,7 @@ const useStyles = makeStyles((theme) => ({
 
 const newList = {
   name: "",
-  color: "",
+  color: "#34ebb7",
   sort: 0,
   boards: [
     {
@@ -142,12 +142,7 @@ const TodoListForm = ({ list = newList, onSubmit }) => {
                     <Box my={2}>
                       {values.boards &&
                         values.boards.map((board, index) => (
-                          <Box
-                            {...console.log(board, board.memberIds)}
-                            position="relative"
-                            my={2}
-                            key={index}
-                          >
+                          <Box position="relative" my={2} key={index}>
                             <Card variant="outlined">
                               <CardContent>
                                 <Box

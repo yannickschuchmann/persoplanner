@@ -123,16 +123,31 @@ export const TodoLists = ({
   useEffect(() => {
     lists.forEach(async (list) => {
       const cardsPerBoard = await Promise.all(
-        map(async ({ id, listId, memberId }) => {
+        map(async ({ id, listId, memberIds, labelIds }) => {
           let cards = await (listId
             ? window.Trello.get(`lists/${listId}/cards`, {})
             : window.Trello.get(`boards/${id}/cards`, {}));
 
-          if (memberId) {
-            cards = filter(
-              compose(includes(memberId), prop("idMembers")),
-              cards
-            );
+          if (memberIds.length > 0) {
+            cards = filter((card) => {
+              const filteredMemberIds = filter(
+                (memberId) => includes(memberId, card.idMembers),
+                memberIds
+              );
+
+              return filteredMemberIds.length > 0;
+            }, cards);
+          }
+
+          if (labelIds.length > 0) {
+            cards = filter((card) => {
+              const filteredLabelIds = filter(
+                (labelId) => includes(labelId, card.idLabels),
+                labelIds
+              );
+
+              return filteredLabelIds.length > 0;
+            }, cards);
           }
 
           return cards;
@@ -164,10 +179,6 @@ export const TodoLists = ({
 
   const onTabsChange = (_, newTabIndex) => {
     setTabIndex(newTabIndex);
-  };
-
-  const onSubmit = async (values) => {
-    await onTodoListSubmit(values);
   };
 
   return (
